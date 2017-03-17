@@ -1,6 +1,7 @@
 package com.prodyna.td.iterator;
 
 import com.prodyna.td.mvc.Image;
+import com.prodyna.td.util.ImageFactory;
 
 // Iterator Pattern
 public class ImageRepository implements ImageContainer {
@@ -13,23 +14,26 @@ public class ImageRepository implements ImageContainer {
 	}
 	
 	public ImageRepository() {
-		// TODO Auto-generated constructor stub
+		
+		Image i1 = ImageFactory.createRandomImage();
+		Image i2 = ImageFactory.createRandomImage();
+		Image i3 = ImageFactory.createRandomImage();
+		
+		images = new Image[]{i1,i2,i3};
 	}
 	
 	private class ImageIteratorImpl implements ImageIterator {
 		
-		int index;
+		int index = 0;
 		
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			return images.length > index;
 		}
 
 		@Override
 		public Image next() {
-			// TODO Auto-generated method stub
-			return null;
+			return images[index++];
 		}
 	}
 

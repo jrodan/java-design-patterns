@@ -1,6 +1,8 @@
 package com.prodyna.td.util;
 
 import com.prodyna.td.mvc.Image;
+import com.prodyna.td.mvc.ImageImpl;
+import com.prodyna.td.proxy.ImageProxyImpl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,13 +44,22 @@ public class ImageFactory {
 			System.out.println("Error: " + e);
 		}
 		
-		//Image image = new Image();
 		return f;
 	}
 	
 	public static Image createRandomImage() {
-		// TODO 
-		return null;
+		File file = createRandomPhysicalImage();
+		Image image = new ImageProxyImpl(file.getAbsolutePath());
+		return image;
+	}
+	
+	public static Image getRandomImageFromFileSystem(String absolutePath) {
+		Image image = new ImageImpl();
+		File file = new File(absolutePath);
+		image.setFileSize(String.valueOf(file.length()));
+		image.setFile(file);
+		image.setName(file.getName());
+		return image;
 	}
 
 }
